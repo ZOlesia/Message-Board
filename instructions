@@ -1,0 +1,5 @@
+ res.redirect('/');
+    Message.findByIdAndUpdate({_
+    
+
+    <% for (var c=0; c < messages[i].comments.length; c++) {%>

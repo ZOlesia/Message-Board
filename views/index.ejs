@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+      <h4 class="mt-5 mb-4">Dojo Message Board</h4>
+      <hr>
+      <form action ="/wall" method ="post">
+      Name: <input type="text" name="name" class="form-control"><br>
+      Message: <textarea class="form-control vresize" rows="5" name="message"></textarea><br>
+      <div class="row mt-3">
+            <div class="ml-auto">
+                <button type="submit" class="btn btn-success ml-auto">Post message</button>
+            </div>
+        </div>
+      </form> 
+      <% for (var message in messages) {%>
+        <div class="row justify-content-start mt-5">
+            <div class="col-sm"><h4>Name: <%=messages[message].user%></h4></div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-sm"><h4>Message: <%=messages[message].message%></h4></div>
+        </div>
+        <% for(var c in messages[message].comments_message) {%>
+        <div class="row justify-content-start ml-auto">
+            <div class="col-sm ml-5"><%=messages[message].comments_message[c].creator%></div>
+        </div>
+        <div class="row justify-content-start ml-auto">
+            <div class="col-sm ml-5"><%=messages[message].comments_message[c].comment%></div>
+        </div>
+        <%}%>
+            <h4 class="mt-5 mb-4">Post a comment</h4>
+            <form action= "/comments" method = "post">
+                <input type="hidden" value="<%=messages[message]._id%>" name="messageid">
+                <input type="text" name="name" class="form-control">
+                <textarea class="form-control" rows="3" name="comments"></textarea>
+                <div class="row mt-3">
+                    <div class="ml-auto">
+                        <button type="submit" class="btn btn-success ml-auto">Post comment</button>
+                    </div>
+                </div>
+            </form>
+        <%}%>
+    </div>  
+</body>
+</html>
